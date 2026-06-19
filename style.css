@@ -94,3 +94,32 @@
     color: var(--theme-color);
     transform: translateX(-5px);
 }
+
+.login-btn {
+    /* Shape and Layout */
+    display: inline-block;
+    padding: 12px 60px;
+    border-radius: 50px; /* Makes the button pill-shaped */
+    
+    /* Background Gradient */
+    background: linear-gradient(90deg, #4f73d9, #9d5bb6);
+    
+    /* Border Styling */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    
+    /* Text Styling */
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    
+    /* Animation */
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    filter: brightness(1.2);
+    transform: scale(1.05);
+}
