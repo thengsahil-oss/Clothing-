@@ -1,0 +1,96 @@
+/* --- REPLACE EVERYTHING FROM .split-layout DOWN TO .back-btn WITH THIS --- */
+
+.split-layout {
+    display: flex;
+    padding: 0 10%;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh; 
+    box-sizing: border-box;
+    gap: 50px; /* Creates a safe zone between text and image */
+}
+
+.right-stats {
+    flex: 1;
+    max-width: 50%; /* Forces text to stay on the left half */
+}
+
+.right-stats h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 7rem; 
+    margin-bottom: 20px;
+    line-height: 1;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 5px;
+}
+
+.stat-box {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 30px;
+    border-left: 5px solid var(--theme-color); 
+    border-radius: 0 10px 10px 0;
+    backdrop-filter: blur(5px);
+}
+
+.stat-box strong {
+    color: var(--theme-color);
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.stat-box p {
+    line-height: 1.6;
+    color: #cacedb;
+    font-size: 1.1rem;
+}
+
+.stat-box span {
+    font-size: 1.2rem;
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+/* STRICT RIGHT-SIDE IMAGE CONTAINER */
+.left-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    max-width: 45%; /* Never allows the image to cross the middle of the screen */
+    height: 80vh;
+}
+
+.left-image img {
+    max-width: 100%; /* Limits width */
+    max-height: 100%; /* Limits height */
+    width: auto;
+    height: auto;
+    object-fit: contain; /* Ensures the whole image fits without cropping */
+    border-radius: 15px; /* Softens the edges of the rectangular posters */
+    box-shadow: -10px 10px 30px rgba(0,0,0,0.5); 
+}
+
+.back-btn {
+    position: absolute;
+    top: 40px;
+    left: 50px;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #a0aabf;
+    border: none;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 2px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: 0.3s;
+    z-index: 10;
+}
+
+.back-btn:hover {
+    color: var(--theme-color);
+    transform: translateX(-5px);
+}
