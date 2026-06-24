@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <title>Marvel Cinematic Interface</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-    
+
     <style>
         /* =========================================
            CSS STYLING - CINEMATIC DASHBOARD
         ========================================= */
         :root {
-            --theme-color: #e23636; 
+            --theme-color: #e23636;
             --bg-dark: #0a0c10;
             --text-light: #a0aabf;
         }
@@ -25,8 +25,8 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background: linear-gradient(rgba(12, 16, 23, 0.75), rgba(12, 16, 23, 0.75)), 
-                        url("{{ url_for('static', filename='marvel_background.jpg') }}");
+            background: linear-gradient(rgba(12, 16, 23, 0.75), rgba(12, 16, 23, 0.75)),
+                        url("marvel_background.jpg");
             background-size: cover;
             background-position: center;
             color: white;
@@ -124,7 +124,7 @@
         .top-right-logo {
             position: absolute;
             top: 35px;
-            right: 120px; 
+            right: 120px;
             height: 25px;
             z-index: 30;
         }
@@ -290,7 +290,7 @@
             display: flex; flex-direction: column; align-items: center;
             z-index: 50; position: relative;
         }
-        
+
         .v-nav-item {
             width: 100%;
             height: 160px;
@@ -307,7 +307,7 @@
         }
 
         .v-nav-item:hover .v-text { color: white; }
-        
+
         /* The dynamic active block */
         .v-nav-item.active-v-nav {
             background-color: var(--theme-color);
@@ -323,41 +323,63 @@
         }
         #music-btn:hover { color: white; border-color: var(--theme-color); }
         #music-btn.playing { color: var(--theme-color); border-color: var(--theme-color); }
+
+        /* SIGN UP BUTTON */
+        .signup-link {
+            position: absolute;
+            top: 40px;
+            right: 100px;
+            z-index: 100;
+            color: white;
+            text-decoration: none;
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            padding: 10px 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 30px;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        .signup-link:hover { opacity: 1; border-color: var(--theme-color); color: var(--theme-color); }
     </style>
 </head>
-<body class="theme-iron_man"> <!-- Default to Iron Man based on screenshot -->
+<body class="theme-iron_man">
 
     <audio id="theme-song" loop>
-        <source src="{{ url_for('static', filename='marvel_theme.mp3') }}" type="audio/mpeg">
+        <source src="marvel_theme.mp3" type="audio/mpeg">
     </audio>
     <button id="music-btn" onclick="toggleMusic()">🎵 PLAY THEME</button>
+
+    <a href="/signup" class="signup-link">SIGN UP</a>
 
     <!-- LEFT SIDEBAR -->
     <aside class="left-sidebar">
         <div class="brand-logo">MARVEL</div>
         <div class="thumbnail-list">
             <div class="thumb-item" id="thumb-spiderman" onclick="selectCharacter('spiderman')">
-                <img src="{{ url_for('static', filename='spiderman_thumbnail.png') }}" alt="Spider-Man">
+                <img src="spiderman_thumbnail.png" alt="Spider-Man">
                 <div class="thumb-overlay"></div><span class="thumb-name">SPIDER-MAN</span>
             </div>
             <div class="thumb-item" id="thumb-captain_america" onclick="selectCharacter('captain_america')">
-                <img src="{{ url_for('static', filename='cap_thumbnail.png') }}" alt="Cap">
+                <img src="cap_thumbnail.png" alt="Cap">
                 <div class="thumb-overlay"></div><span class="thumb-name">CAPTAIN AMERICA</span>
             </div>
             <div class="thumb-item active" id="thumb-iron_man" onclick="selectCharacter('iron_man')">
-                <img src="{{ url_for('static', filename='ironman_thumbnail.png') }}" alt="Iron Man">
+                <img src="ironman_thumbnail.png" alt="Iron Man">
                 <div class="thumb-overlay"></div><span class="thumb-name">IRON MAN</span>
             </div>
             <div class="thumb-item" id="thumb-thor" onclick="selectCharacter('thor')">
-                <img src="{{ url_for('static', filename='thor_thumbnail.png') }}" alt="Thor">
+                <img src="thor_thumbnail.png" alt="Thor">
                 <div class="thumb-overlay"></div><span class="thumb-name">THOR</span>
             </div>
             <div class="thumb-item" id="thumb-hulk" onclick="selectCharacter('hulk')">
-                <img src="{{ url_for('static', filename='hulk_thumbnail.png') }}" alt="Hulk">
+                <img src="hulk_thumbnail.png" alt="Hulk">
                 <div class="thumb-overlay"></div><span class="thumb-name">HULK</span>
             </div>
             <div class="thumb-item" id="thumb-scarlet_witch" onclick="selectCharacter('scarlet_witch')">
-                <img src="{{ url_for('static', filename='scarlet_witch_thumbnail.png') }}" alt="Scarlet">
+                <img src="scarlet_witch_thumbnail.png" alt="Scarlet">
                 <div class="thumb-overlay"></div><span class="thumb-name">SCARLET WITCH</span>
             </div>
         </div>
@@ -366,10 +388,6 @@
 
     <!-- MAIN CENTRAL CONTENT -->
     <main class="main-content">
-        
-        <div class="top-right-logo">
-            <img src="{{ url_for('static', filename='marvel_logo.png') }}" alt="Marvel Logo" onerror="this.style.display='none'">
-        </div>
 
         <!-- ===================================== -->
         <!-- MASTER TAB 1: PORTADA (The Main View) -->
@@ -377,8 +395,7 @@
         <div id="master-portada" class="master-tab active-master">
             <nav class="top-nav">
                 <span class="nav-link active-nav" id="nav-inicio" onclick="switchInnerTab(event, 'inicio')">INICIO</span>
-                <!-- Added ID to Synopsis so the Ver Mas button can "click" it -->
-                <span class="nav-link" id="nav-synopsis" onclick="switchInnerTab(event, 'synopsis')">SYNOPSIS</span> 
+                <span class="nav-link" id="nav-synopsis" onclick="switchInnerTab(event, 'synopsis')">SYNOPSIS</span>
                 <span class="nav-link" onclick="switchInnerTab(event, 'cast')">CAST</span>
                 <span class="nav-link" onclick="switchInnerTab(event, 'gallery')">GALLERY</span>
                 <span class="nav-link" onclick="switchInnerTab(event, 'trailer')">TRAILER</span>
@@ -390,7 +407,6 @@
                     <span class="title-light" id="title-second">MAN</span>
                 </div>
                 <p class="section-text" id="detail-bg" style="max-width: 500px;">Tony Stark is a genius, billionaire, playboy, and philanthropist.</p>
-                <!-- VER MAS BUTTON NOW TRIGGERS SYNOPSIS TAB -->
                 <button class="ver-mas-btn" onclick="document.getElementById('nav-synopsis').click()">VER MAS >></button>
             </div>
 
@@ -407,9 +423,9 @@
             <div id="tab-gallery" class="tab-content">
                 <h2 class="section-header">CONCEPT ART & STILLS</h2>
                 <div class="gallery-grid">
-                    <div class="gallery-item"><img src="{{ url_for('static', filename='spiderman_thumbnail.png') }}"></div>
-                    <div class="gallery-item"><img src="{{ url_for('static', filename='cap_thumbnail.png') }}"></div>
-                    <div class="gallery-item"><img src="{{ url_for('static', filename='ironman_thumbnail.png') }}"></div>
+                    <div class="gallery-item"><img src="spiderman_thumbnail.png"></div>
+                    <div class="gallery-item"><img src="cap_thumbnail.png"></div>
+                    <div class="gallery-item"><img src="ironman_thumbnail.png"></div>
                 </div>
             </div>
 
@@ -420,8 +436,7 @@
                 </div>
             </div>
 
-            <!-- Image hides if synopsis is open by default -->
-            <img class="hero-image" id="detail-image" src="{{ url_for('static', filename='ironman_cutout.png') }}" onerror="this.style.display='none'">
+            <img class="hero-image" id="detail-image" src="ironman_cutout.png" onerror="this.style.display='none'">
         </div>
 
         <!-- ===================================== -->
@@ -442,7 +457,7 @@
         <!-- ===================================== -->
         <div id="master-poster" class="master-tab">
             <div class="poster-container">
-                <img class="poster-image" id="detail-poster" src="{{ url_for('static', filename='ironman_thumbnail.png') }}" alt="Movie Poster">
+                <img class="poster-image" id="detail-poster" src="ironman_thumbnail.png" alt="Movie Poster">
             </div>
         </div>
 
@@ -464,8 +479,6 @@
                 </div>
             </div>
         </div>
-
-
 
     </main>
 
@@ -491,13 +504,13 @@
     <script>
         const characters = {
             'spiderman': {
-                titleFirst: 'IRON', titleSecond: 'SPIDER', 
+                titleFirst: 'IRON', titleSecond: 'SPIDER',
                 background: 'A teenager from Queens who was bitten by a radioactive spider.',
                 synopsis: 'Following the events of the Infinity War, Peter Parker must step up and take on new responsibilities. Equipped with the high-tech Iron Spider armor designed by Tony Stark, his capabilities are enhanced with mechanical spider-arms and advanced targeting systems. Torn between his normal teenage life and his duty as a hero, Peter must confront multiversal threats and redefine what it means to be the friendly neighborhood Spider-Man.',
                 actor: 'Tom Holland',
-                trailer: 'https://www.youtube.com/embed/Nt9L1jCKGnE', 
-                image: '/static/spiderman_cutout.png', 
-                poster: '/static/spiderman_thumbnail.png',
+                trailer: 'https://www.youtube.com/embed/Nt9L1jCKGnE',
+                image: 'spiderman_cutout.png',
+                poster: 'spiderman_thumbnail.png',
                 history: 'Peter Parker gained his powers after being bitten by a radioactive spider on a high school field trip. \n\nLearning that "With great power comes great responsibility" after the tragic death of his Uncle Ben, he dedicated his life to fighting crime in New York City.',
                 combat: 'STRENGTH: 8/10\nSPEED: 9/10\nDURABILITY: 7/10\nINTELLIGENCE: 9/10',
                 abilities: '- Danger-warning Spider-Sense\n- Superhuman strength and agility\n- Wall-crawling\n- Web-shooters (Stark Tech Upgraded)',
@@ -508,9 +521,9 @@
                 background: 'A frail World War II volunteer who was enhanced by the Super Soldier Serum.',
                 synopsis: 'Steve Rogers, the first Avenger, was frozen in ice for decades before waking up in the modern world. He serves as the moral compass and tactical leader of the Avengers. From fighting the tyrannical forces of Hydra in WWII to standing against Thanos\'s alien army, Captain America wields his virtually indestructible vibranium shield to defend freedom and justice whatever the cost.',
                 actor: 'Chris Evans',
-                trailer: 'https://www.youtube.com/embed/7SlILk2WMTI', 
-                image: '/static/cap_cutout.png',
-                poster: '/static/cap_thumbnail.png',
+                trailer: 'https://www.youtube.com/embed/7SlILk2WMTI',
+                image: 'cap_cutout.png',
+                poster: 'cap_thumbnail.png',
                 history: 'Born in 1918, Steve Rogers was a scrawny fine arts student who desperately wanted to fight in WWII. Rejected due to health issues, he volunteered for Project Rebirth.\n\nThe serum transformed him into the pinnacle of human perfection. After crashing into the Arctic, he awoke 70 years later to a changed world.',
                 combat: 'STRENGTH: 7/10\nSPEED: 7/10\nDURABILITY: 8/10\nINTELLIGENCE: 8/10',
                 abilities: '- Master Martial Artist & Tactician\n- Enhanced human physiology\n- Indestructible Vibranium Shield',
@@ -521,9 +534,9 @@
                 background: 'Tony Stark is a genius, billionaire, playboy, and philanthropist.',
                 synopsis: 'After a life-threatening incident, Tony Stark creates a mechanized suit of armor to save his own life and escape captivity. He continues to refine his technology, fighting foes in a high-tech suit equipped with advanced flight capabilities, repulsor rays, and cutting-edge weaponry. As the founding benefactor of the Avengers, Tony constantly wrestles with his ego, his legacy, and his ultimate desire to put a "suit of armor around the world".',
                 actor: 'Robert Downey Jr.',
-                trailer: 'https://www.youtube.com/embed/8ugaeA-nMTc', 
-                image: '/static/ironman_cutout.png',
-                poster: '/static/ironman_thumbnail.png',
+                trailer: 'https://www.youtube.com/embed/8ugaeA-nMTc',
+                image: 'ironman_cutout.png',
+                poster: 'ironman_thumbnail.png',
                 history: 'Anthony Edward Stark inherited Stark Industries from his father, Howard Stark. After being captured by the Ten Rings terrorist group, he built the Mark I armor to escape.\n\nRealizing his weapons were falling into the wrong hands, he shut down weapon manufacturing to become the armored hero, Iron Man.',
                 combat: 'STRENGTH: 9/10 (In Suit)\nSPEED: 10/10 (Flight)\nDURABILITY: 9/10\nINTELLIGENCE: 10/10',
                 abilities: '- Genius-level intellect\n- Powered Exoskeleton\n- Repulsor Blasts & Unibeam\n- Advanced AI targeting',
@@ -534,9 +547,9 @@
                 background: 'The Asgardian God of Thunder, wielding the enchanted hammer Mjolnir.',
                 synopsis: 'Banished to Earth to learn a lesson in humility, Thor Odinson must prove himself worthy to wield his power. Stripped of his legendary hammer, Mjolnir, Thor learns what it truly means to be a hero. Across his centuries of life, he has battled dark elves, the Goddess of Death, and the Mad Titan Thanos, eventually discovering that his true power comes not from his weapon, but from within as the God of Thunder.',
                 actor: 'Chris Hemsworth',
-                trailer: 'https://www.youtube.com/embed/v7MGUNV8MxU', 
-                image: '/static/thor_cutout.png', 
-                poster: '/static/thor_thumbnail.png',
+                trailer: 'https://www.youtube.com/embed/v7MGUNV8MxU',
+                image: 'thor_cutout.png',
+                poster: 'thor_thumbnail.png',
                 history: 'Thor is the God of Thunder, son of Odin, the All-Father of Asgard. Originally arrogant and reckless, his banishment to Midgard (Earth) taught him humility.\n\nHe is a founding member of the Avengers and the sworn protector of the Nine Realms.',
                 combat: 'STRENGTH: 10/10\nSPEED: 8/10\nDURABILITY: 10/10\nINTELLIGENCE: 6/10',
                 abilities: '- Immortality and Asgardian Physiology\n- Manipulation of Weather and Lightning\n- Flight via Mjolnir/Stormbreaker',
@@ -547,9 +560,9 @@
                 background: 'Dr. Bruce Banner transforms into a giant, green, rage-fueled behemoth.',
                 synopsis: 'A brilliant scientist exposed to a massive dose of gamma radiation, Bruce Banner struggles to control the beast within. When provoked, he transforms into the Hulk—the angrier he gets, the stronger he becomes. Despite being hunted by the military and fearing his own destructive potential, Banner eventually learns to merge his genius intellect with the Hulk\'s limitless superhuman strength to protect the world.',
                 actor: 'Mark Ruffalo',
-                trailer: 'https://www.youtube.com/embed/xbqNb2PFKKA', 
-                image: '/static/hulk_cutout.png',
-                poster: '/static/hulk_thumbnail.png',
+                trailer: 'https://www.youtube.com/embed/xbqNb2PFKKA',
+                image: 'hulk_cutout.png',
+                poster: 'hulk_thumbnail.png',
                 history: 'While working on recreating the Super Soldier Serum for the US Military, Dr. Bruce Banner subjected himself to intense Gamma Radiation.\n\nThe experiment failed catastrophically, creating an alter-ego formed from Banner\'s repressed anger that manifests physically as an unstoppable green giant.',
                 combat: 'STRENGTH: 10/10 (Limitless)\nSPEED: 8/10\nDURABILITY: 10/10\nINTELLIGENCE: 10/10 (As Banner)',
                 abilities: '- Virtually limitless physical strength\n- Nigh-Invulnerability\n- Regenerative Healing Factor\n- Leaping miles at a time',
@@ -560,9 +573,9 @@
                 background: 'Wanda Maximoff is a tremendously powerful being capable of harnessing Chaos Magic.',
                 synopsis: 'Starting out as an antagonist manipulated by Hydra, Wanda eventually joins the Avengers to fight for humanity. Her devastating powers allow her to alter reality, manipulate energy, cast hexes, and employ advanced telekinesis. Driven by profound grief over the loss of her brother, Pietro, and her soulmate, Vision, Wanda\'s journey leads her to fully embrace her mythical destiny as the Scarlet Witch, making her one of the universe\'s most formidable beings.',
                 actor: 'Elizabeth Olsen',
-                trailer: 'https://www.youtube.com/embed/sj9J2ecsSpo', 
-                image: '/static/scarlet_witch_cutout.png',
-                poster: '/static/scarlet_witch_thumbnail.png',
+                trailer: 'https://www.youtube.com/embed/sj9J2ecsSpo',
+                image: 'scarlet_witch_cutout.png',
+                poster: 'scarlet_witch_thumbnail.png',
                 history: 'Wanda and her twin brother Pietro volunteered for Hydra experiments using the Mind Stone. The stone unlocked Wanda\'s latent magical abilities.\n\nDriven by grief from the loss of her family and eventually Vision, she embraced her destiny as the prophesied Scarlet Witch, wielding immense chaos magic.',
                 combat: 'STRENGTH: 4/10\nSPEED: 5/10\nDURABILITY: 5/10\nMAGIC: 10/10 (Reality Warping)',
                 abilities: '- Chaos Magic manipulation\n- Telekinesis & Telepathy\n- Reality Warping\n- Hex casting & Energy projection',
@@ -585,14 +598,15 @@
             document.getElementById('detail-combat').innerText = char.combat;
             document.getElementById('detail-abilities').innerText = char.abilities;
             document.getElementById('detail-poster').src = char.poster;
-            
+
             // Image handling
             const imgElement = document.getElementById('detail-image');
             imgElement.style.opacity = 0;
             imgElement.style.transform = 'scale(0.95) translateX(20px)';
             setTimeout(() => {
                 imgElement.src = char.image;
-                if (document.getElementById('master-portada').classList.contains('active-master') && 
+                imgElement.style.display = '';
+                if (document.getElementById('master-portada').classList.contains('active-master') &&
                     document.getElementById('tab-inicio').classList.contains('active-tab')) {
                     imgElement.style.opacity = 1;
                     imgElement.style.transform = 'scale(1) translateX(0)';
@@ -665,20 +679,3 @@
     </script>
 </body>
 </html>
-
-</div>
-
-        <div style="position: absolute; top: 40px; right: 200px; z-index: 100;">
-    <a href="/signup" style="
-        color: white; 
-        text-decoration: none; 
-        font-family: 'Oswald', sans-serif; 
-        letter-spacing: 2px; 
-        font-size: 0.9rem; 
-        opacity: 0.8;
-        padding: 10px 20px;
-        transition: 0.3s;">
-        SIGN UP
-    </a>
-</div>
-
